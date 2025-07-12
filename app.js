@@ -71,4 +71,57 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Add to app.js
+// After service worker registration
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+            .then(registration => {
+                console.log('SW registered');
+                registration.update(); // Force update
+            });
+    });
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const dayEmojis = {
+        monday: '😎',
+        tuesday: '🫡',
+        wednesday: '😛',
+        thursday: '🤪',
+        friday: '😉',
+        saturday: '😇'
+    };
+
+    const muscleEmojis = {
+        biceps: '💪🏻',
+        shoulder: '🦸‍♂️',
+        chest: '🏋️‍♀️',
+        back: '🦸‍♀️',
+        leg: '🦵',
+        cardio: '🏃'
+    };
+
+    document.querySelectorAll('.day-card').forEach(card => {
+        const day = card.querySelector('.day-title').textContent.toLowerCase();
+        const muscle = card.querySelector('.muscle-group').textContent.toLowerCase();
+        
+        // Add day emoji
+        for (const [key, emoji] of Object.entries(dayEmojis)) {
+            if (day.includes(key)) {
+                card.querySelector('.day-title').textContent += ` ${emoji}`;
+                break;
+            }
+        }
+        
+        // Add muscle emoji
+        for (const [key, emoji] of Object.entries(muscleEmojis)) {
+            if (muscle.includes(key)) {
+                card.querySelector('.muscle-group').textContent += ` ${emoji}`;
+                break;
+            }
+        }
+    });
+});
 

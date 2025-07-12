@@ -2,7 +2,7 @@ const CACHE_NAME = 'workout-pwa-v1';
 const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
-    '/styles.css',
+    '/style.css',
     '/app.js',
     '/manifest.json',
     '/icons/icon-192x192.png',
