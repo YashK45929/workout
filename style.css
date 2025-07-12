@@ -1,3 +1,4 @@
+/* Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -8,27 +9,29 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     color: #fff;
+    min-height: 100vh;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 20px;
 }
 
+/* Container - Centered with max-width */
 .container {
+    width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 30px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    margin: 20px auto;
 }
 
+/* Typography */
 h1 {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 4vw, 2.5rem); /* Responsive font size */
     margin-bottom: 10px;
     background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
     -webkit-background-clip: text;
@@ -38,11 +41,12 @@ h1 {
 
 .subtitle {
     text-align: center;
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
     margin-bottom: 30px;
     color: #b0b0b0;
 }
 
+/* Program Overview Grid - Responsive */
 .program-overview {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -50,6 +54,7 @@ h1 {
     margin-bottom: 30px;
 }
 
+/* Day Cards */
 .day-card {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
@@ -64,50 +69,47 @@ h1 {
 }
 
 .day-title {
-    font-size: 1.3rem;
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
     font-weight: bold;
     margin-bottom: 10px;
     color: #4ecdc4;
 }
 
 .muscle-group {
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
     color: #ff6b6b;
     margin-bottom: 15px;
 }
 
 .exercise-count {
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
     color: #b0b0b0;
 }
 
 
-/* PWA Install Button */
-.install-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: linear-gradient(45deg, #4ecdc4, #ff6b6b);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    display: none;
-}
-
+/* Mobile-Specific Adjustments */
 @media (max-width: 768px) {
     .container {
-        padding: 15px;
+        padding: 20px 15px;
+        border-radius: 15px;
+        margin: 10px;
     }
-    
-    h1 {
-        font-size: 2rem;
-    }
-    
+
     .program-overview {
         grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+}
+
+/* Very Small Screens */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .day-card, .feature-card {
+        padding: 15px;
+    }
     }
 }
