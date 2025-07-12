@@ -1,7 +1,7 @@
 {
-    "name": "Training Program Generator",
-    "short_name": "Workout PWA",
-    "description": "Evidence-Based Exercise Programming with Comprehensive Tracking",
+    "name": "Tyaari",
+    "short_name": "Tyaari",
+    "description": "Guriji special gym training",
     "start_url": "/",
     "display": "standalone",
     "theme_color": "#1a1a2e",
