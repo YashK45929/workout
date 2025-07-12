@@ -77,29 +77,6 @@ h1 {
     color: #b0b0b0;
 }
 
-.generate-section {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.generate-btn {
-    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-    color: white;
-    border: none;
-    padding: 15px 40px;
-    font-size: 1.2rem;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.generate-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
-}
 
 .loading {
     display: none;
