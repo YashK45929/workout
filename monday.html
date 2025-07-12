@@ -21,19 +21,29 @@
         
         <div class="workout-list">
             <!-- Exercise 1 -->
-            <div class="exercise-card">
-                <div class="exercise-header">
-                    <h2>1. Barbell Bicep Curl</h2>
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <h2>1. Barbell Bicep Curl</h2>
+                        <button class="play-button" data-video="Biceps/1.mp4">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M8 5v14l11-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="exercise-specs">
+                        <span>3 sets × 8-12 reps</span>
+                        <span>60-90s rest</span>
+                    </div>
+                    <!-- Video will be injected here when play is clicked -->
                 </div>
-                <div class="exercise-specs">
-                </div>
-            </div>
-            
             <!-- Exercise 2 -->
                 <!-- ... more exercises ... -->
             </div>
         </div>
-        <a href="index.html" class="back-button">All Days</a>
+        <a href="index.html" class="back-button" aria-label="Back to workout program">
+            <span class="button-text">Main Page</span>
+        </a>
     </div>
 </body>
 </html>

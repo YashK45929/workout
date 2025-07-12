@@ -125,3 +125,40 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.play-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const videoSrc = this.getAttribute('data-video');
+            const exerciseCard = this.closest('.exercise-card');
+            
+            // Remove any existing video first
+            const existingVideo = exerciseCard.querySelector('.exercise-video');
+            if (existingVideo) {
+                existingVideo.remove();
+            }
+            
+            // Create new video element
+            const videoHTML = `
+                <div class="exercise-video">
+                    <video controls autoplay>
+                        <source src="${videoSrc}" type="video/mp4">
+                    </video>
+                    <button class="close-video" title="Close video">×</button>
+                </div>
+            `;
+            
+            // Insert after exercise specs
+            const specsDiv = exerciseCard.querySelector('.exercise-specs');
+            specsDiv.insertAdjacentHTML('afterend', videoHTML);
+            
+            // Handle close button
+            exerciseCard.querySelector('.close-video').addEventListener('click', (e) => {
+                e.stopPropagation();
+                const videoContainer = e.target.closest('.exercise-video');
+                videoContainer.querySelector('video').pause();
+                videoContainer.remove();
+            });
+        });
+    });
+});
+
