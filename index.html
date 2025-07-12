@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Training Program Generator</title>
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="description" content="Evidence-Based Exercise Programming with Comprehensive Tracking">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Advanced Training Program Generator</h1>
+        <p class="subtitle">Evidence-Based Exercise Programming with Comprehensive Tracking</p>
+        
+        <div class="program-overview">
+            <div class="day-card">
+                <div class="day-title">Monday</div>
+                <div class="muscle-group">Biceps Training</div>
+                <div class="exercise-count">8 exercises • 24 total sets</div>
+            </div>
+            <div class="day-card">
+                <div class="day-title">Tuesday</div>
+                <div class="muscle-group">Shoulder Development</div>
+                <div class="exercise-count">9 exercises • 27 total sets</div>
+            </div>
+            <div class="day-card">
+                <div class="day-title">Wednesday</div>
+                <div class="muscle-group">Chest Training</div>
+                <div class="exercise-count">10 exercises • 30 total sets</div>
+            </div>
+            <div class="day-card">
+                <div class="day-title">Thursday</div>
+                <div class="muscle-group">Back Development</div>
+                <div class="exercise-count">11 exercises • 33 total sets</div>
+            </div>
+            <div class="day-card">
+                <div class="day-title">Friday</div>
+                <div class="muscle-group">Leg Training</div>
+                <div class="exercise-count">12 exercises • 36 total sets</div>
+            </div>
+            <div class="day-card">
+                <div class="day-title">Saturday</div>
+                <div class="muscle-group">Abs + Triceps + Cardio</div>
+                <div class="exercise-count">15 exercises • Mixed protocols</div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-title">🎯 Scientific Programming</div>
+                <div class="feature-description">
+                    Evidence-based exercise selection with precise rep ranges, set protocols, and rest intervals optimized for hypertrophy and strength development.
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-title">📈 Progressive Overload</div>
+                <div class="feature-description">
+                    Systematic progression tracking with load, volume, and intensity parameters to ensure continuous adaptation and prevent plateaus.
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-title">🔬 Biomechanical Analysis</div>
+                <div class="feature-description">
+                    Detailed exercise descriptions with muscle activation patterns, joint angles, and movement mechanics for optimal execution.
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-title">⚡ Recovery Protocols</div>
+                <div class="feature-description">
+                    Scientifically-determined rest intervals and recovery strategies to maximize training adaptations and minimize overtraining risk.
+                </div>
+            </div>
+        </div>
+
+        <div class="generate-section">
+            <button class="generate-btn" id="generateBtn">
+                Generate Complete Excel Workbook
+            </button>
+            <div class="loading" id="loading">
+                <div>Processing training data...</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
