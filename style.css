@@ -730,3 +730,100 @@ h1 span {
 .dropdown-icon {
     transition: transform 0.3s ease;
 }
+
+/* 📱 Mobile Friendly Fixes for monday.html */
+
+/* Responsive container */
+@media (max-width: 768px) {
+  .day-page .container {
+    padding: 20px 15px;
+    margin: 10px;
+  }
+
+  .day-header h1 {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    text-align: center;
+  }
+
+  .set-reps {
+    font-size: 1.2rem;
+  }
+
+  .set-weight {
+    font-size: 0.8rem;
+  }
+
+  .set-card {
+    min-width: 140px;
+    padding: 12px;
+  }
+
+  .set-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .set-checkbox {
+    margin-left: 0;
+    align-self: flex-end;
+  }
+
+  .checkmark {
+    width: 20px;
+    height: 20px;
+  }
+
+  .play-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .exercise-video video {
+    width: 100%;
+    height: auto;
+  }
+
+  .exercise-card {
+    padding: 15px;
+  }
+
+  .exercise-header h2 {
+    font-size: 1rem;
+  }
+
+  .day-subtitle {
+    font-size: 0.9rem;
+    color: #b0b0b0;
+  }
+}
+
+/* Extra small screens (e.g. 360px wide) */
+@media (max-width: 480px) {
+  .set-card {
+    min-width: 130px;
+    padding: 10px;
+  }
+
+  .set-reps {
+    font-size: 1rem;
+  }
+
+  .exercise-card {
+    padding: 12px;
+  }
+
+  .exercise-header h2 {
+    font-size: 0.95rem;
+  }
+
+  .play-button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .checkmark {
+    width: 18px;
+    height: 18px;
+  }
+}
