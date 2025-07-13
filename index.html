@@ -68,7 +68,7 @@
         // Register Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-            navigator.serviceWorker.register('https://yashk45929.github.io/workout/manifest.json')
+            navigator.serviceWorker.register('https://yashk45929.github.io/workout/service-worker.js')
                 .then(registration => {
                 console.log('ServiceWorker registered');
                 })

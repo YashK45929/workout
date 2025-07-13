@@ -5,8 +5,8 @@ const urlsToCache = [
   '/style.css',
   '/app.js',
   'https://yashk45929.github.io/workout/',
-  '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png'
+  'https://yashk45929.github.io/workout/icon-192x192.png',
+  'https://yashk45929.github.io/workout/icon-512x512.png'
 ];
 
 self.addEventListener('install', event => {
