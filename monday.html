@@ -11,9 +11,54 @@
             --secondary-accent: #4ecdc4;
         }
         .exercise-card { border-left: 4px solid var(--primary-accent); }
+        
+        /* Updated exercise header styles */
+        .exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start; /* Align items to top */
+        }
+        
+        .exercise-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-grow: 1;
+        }
+        
+        .exercise-buttons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        /* Position play button closer to text */
+        .play-button {
+            margin-left: 5px;
+            transform: translateY(-2px); /* Slight upward adjustment */
+        }
+        
+        /* Fixed back button positioning */
+        .day-page .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+        
+        @media (min-width: 768px) {
+            .day-page .back-button {
+                top: 30px;
+                left: 30px;
+            }
+        }
     </style>
 </head>
 <body class="day-page monday">
+    <a href="index.html" class="back-button" aria-label="Back to workout program">
+        <span class="button-text">Main Page</span>
+    </a>
+
     <div class="container">
         <header class="day-header">
             <h1 id="monday"><span>Monday : Biceps Training</span></h1>
@@ -21,29 +66,138 @@
         
         <div class="workout-list">
             <!-- Exercise 1 -->
-                <div class="exercise-card">
-                    <div class="exercise-header">
-                        <h2>1. Barbell Bicep Curl</h2>
+            <div class="exercise-card">
+                <div class="exercise-header">
+                    <div class="exercise-title-wrapper">
+                        <h2>1️⃣ Dumbbell Alternate Bicep Curl</h2>
+                        <!-- Moved play button here -->
                         <button class="play-button" data-video="Biceps/1.mp4">
-                            <svg viewBox="0 0 24 24" width="24" height="24">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
                                 <path fill="currentColor" d="M8 5v14l11-7z"/>
                             </svg>
                         </button>
                     </div>
-                    
-                    <div class="exercise-specs">
-                        <span>3 sets × 8-12 reps</span>
-                        <span>60-90s rest</span>
-                    </div>
-                    <!-- Video will be injected here when play is clicked -->
+                    <button class="toggle-sets-btn">
+                        <svg class="dropdown-icon" viewBox="0 0 24 24" width="20" height="20">
+                            <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
                 </div>
-            <!-- Exercise 2 -->
-                <!-- ... more exercises ... -->
+                
+                <!-- Sets dropdown -->
+                <div class="sets-dropdown">
+                    <div class="sets-container">
+                        <!-- Set 1 -->
+                        <div class="set-card" data-set="1">
+                            <div class="set-content">
+                                <div class="set-info">
+                                    <h3 class="set-title">Set 1</h3>
+                                    <p class="set-reps">25 reps</p>
+                                    <p class="set-weight low">Low Weight</p>
+                                </div>
+                                <label class="set-checkbox">
+                                    <input type="checkbox" class="completion-toggle">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Set 2 -->
+                        <div class="set-card" data-set="2">
+                            <div class="set-content">
+                                <div class="set-info">
+                                    <h3 class="set-title">Set 2</h3>
+                                    <p class="set-reps">20 reps</p>
+                                    <p class="set-weight medium">Medium Weight</p>
+                                </div>
+                                <label class="set-checkbox">
+                                    <input type="checkbox" class="completion-toggle">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Set 3 -->
+                        <div class="set-card" data-set="3">
+                            <div class="set-content">
+                                <div class="set-info">
+                                    <h3 class="set-title">Set 3</h3>
+                                    <p class="set-reps">15 reps</p>
+                                    <p class="set-weight high">High Weight</p>
+                                </div>
+                                <label class="set-checkbox">
+                                    <input type="checkbox" class="completion-toggle">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video container -->
+                <div class="exercise-video-container"></div>
             </div>
         </div>
-        <a href="index.html" class="back-button" aria-label="Back to workout program">
-            <span class="button-text">Main Page</span>
-        </a>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Dropdown functionality
+        document.querySelectorAll('.toggle-sets-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const exerciseCard = this.closest('.exercise-card');
+                const dropdown = exerciseCard.querySelector('.sets-dropdown');
+                
+                // Toggle dropdown
+                dropdown.classList.toggle('show');
+                
+                // Rotate icon
+                const icon = this.querySelector('.dropdown-icon');
+                icon.style.transform = dropdown.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0)';
+            });
+        });
+        
+        // Video playback functionality
+        document.querySelectorAll('.play-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const videoPath = this.getAttribute('data-video');
+                const exerciseCard = this.closest('.exercise-card');
+                const videoContainer = exerciseCard.querySelector('.exercise-video-container');
+                
+                // Close other open videos
+                document.querySelectorAll('.exercise-video-container').forEach(container => {
+                    if (container !== videoContainer) {
+                        container.innerHTML = '';
+                        container.classList.remove('show');
+                    }
+                });
+                
+                // Toggle current video
+                if (videoContainer.classList.contains('show')) {
+                    videoContainer.innerHTML = '';
+                    videoContainer.classList.remove('show');
+                } else {
+                    videoContainer.innerHTML = `
+                        <div class="exercise-video">
+                            <video controls autoplay>
+                                <source src="${videoPath}" type="video/mp4">
+                            </video>
+                        </div>`;
+                    videoContainer.classList.add('show');
+                }
+            });
+        });
+        
+        // Checkbox functionality
+        document.querySelectorAll('.completion-toggle').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const setCard = this.closest('.set-card');
+                setCard.classList.toggle('completed', this.checked);
+            });
+        });
+    });
+    </script>
 </body>
 </html>

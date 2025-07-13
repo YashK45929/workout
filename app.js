@@ -1,90 +1,12 @@
-// Comprehensive exercise database
-const exerciseDatabase = {
-    biceps: [
-        {
-            name: "Barbell Bicep Curl",
-            sets: 3,
-            reps: "8-12",
-            rest: "60-90s",
-            notes: "Primary compound movement for biceps brachii activation",
-            muscleActivation: "Biceps Brachii (Primary), Brachialis (Secondary)"
-        },
-        // ... (other biceps exercises)
-    ],
-    shoulders: [
-        {
-            name: "Overhead Press (Military Press)",
-            sets: 4,
-            reps: "6-8",
-            rest: "2-3min",
-            notes: "Primary compound movement for shoulder development",
-            muscleActivation: "Anterior Deltoid (Primary), Medial Deltoid, Triceps"
-        },
-        // ... (other shoulder exercises)
-    ],
-    // ... (other muscle groups)
-};
-
-// DOM Elements
-const generateBtn = document.getElementById('generateBtn');
-const loadingEl = document.getElementById('loading');
-const progressEl = document.getElementById('progressFill');
+// PWA Install Prompt
 let deferredPrompt;
-
-// Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
-    generateBtn.addEventListener('click', generateWorkbook);
-    
-    // PWA Installation
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        const installBtn = document.createElement('button');
-        installBtn.className = 'install-btn';
-        installBtn.textContent = 'Install App';
-        document.body.appendChild(installBtn);
-        installBtn.style.display = 'block';
-        
-        installBtn.addEventListener('click', () => {
-            installBtn.style.display = 'none';
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    console.log('User accepted install');
-                } else {
-                    console.log('User dismissed install');
-                }
-                deferredPrompt = null;
-            });
-        });
-    });
-
-    // Register Service Worker
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js')
-            .then(registration => {
-                console.log('ServiceWorker registration successful');
-            })
-            .catch(err => {
-                console.log('ServiceWorker registration failed: ', err);
-            });
+    const generateBtn = document.getElementById('generateBtn');
+    if (generateBtn) {
+        generateBtn.addEventListener('click', generateWorkbook);
     }
-});
 
-// Add to app.js
-// After service worker registration
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js')
-            .then(registration => {
-                console.log('SW registered');
-                registration.update(); // Force update
-            });
-    });
-}
-
-
-document.addEventListener('DOMContentLoaded', () => {
+    // Emoji Enhancer for Day and Muscle Cards
     const dayEmojis = {
         monday: '😎',
         tuesday: '🫡',
@@ -104,61 +26,164 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     document.querySelectorAll('.day-card').forEach(card => {
-        const day = card.querySelector('.day-title').textContent.toLowerCase();
-        const muscle = card.querySelector('.muscle-group').textContent.toLowerCase();
-        
-        // Add day emoji
+        const day = card.querySelector('.day-title')?.textContent.toLowerCase();
+        const muscle = card.querySelector('.muscle-group')?.textContent.toLowerCase();
+
         for (const [key, emoji] of Object.entries(dayEmojis)) {
-            if (day.includes(key)) {
+            if (day?.includes(key)) {
                 card.querySelector('.day-title').textContent += ` ${emoji}`;
                 break;
             }
         }
-        
-        // Add muscle emoji
+
         for (const [key, emoji] of Object.entries(muscleEmojis)) {
-            if (muscle.includes(key)) {
+            if (muscle?.includes(key)) {
                 card.querySelector('.muscle-group').textContent += ` ${emoji}`;
                 break;
             }
         }
     });
+
+    // Video Playback (YouTube or MP4)
+    // Video playback functionality
+    document.querySelectorAll('.play-button').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent triggering the dropdown toggle
+            
+            const videoPath = this.getAttribute('data-video');
+            const exerciseCard = this.closest('.exercise-card');
+            const videoContainer = exerciseCard.querySelector('.exercise-video-container');
+            
+            // Close other open videos first
+            document.querySelectorAll('.exercise-video-container').forEach(container => {
+                if (container !== videoContainer) {
+                    container.innerHTML = '';
+                    container.classList.remove('show');
+                }
+            });
+            
+            // Toggle current video
+            if (videoContainer.classList.contains('show')) {
+                videoContainer.innerHTML = '';
+                videoContainer.classList.remove('show');
+            } else {
+                videoContainer.innerHTML = `
+                    <div class="exercise-video">
+                        <video controls autoplay>
+                            <source src="${videoPath}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <button class="close-video">×</button>
+                    </div>
+                `;
+                videoContainer.classList.add('show');
+                
+                // Close button functionality
+                videoContainer.querySelector('.close-video').addEventListener('click', function() {
+                    videoContainer.innerHTML = '';
+                    videoContainer.classList.remove('show');
+                });
+            }
+        });
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.play-button').forEach(button => {
-        button.addEventListener('click', function() {
-            const videoSrc = this.getAttribute('data-video');
-            const exerciseCard = this.closest('.exercise-card');
-            
-            // Remove any existing video first
-            const existingVideo = exerciseCard.querySelector('.exercise-video');
-            if (existingVideo) {
-                existingVideo.remove();
-            }
-            
-            // Create new video element
-            const videoHTML = `
-                <div class="exercise-video">
-                    <video controls autoplay>
-                        <source src="${videoSrc}" type="video/mp4">
-                    </video>
-                    <button class="close-video" title="Close video">×</button>
-                </div>
-            `;
-            
-            // Insert after exercise specs
-            const specsDiv = exerciseCard.querySelector('.exercise-specs');
-            specsDiv.insertAdjacentHTML('afterend', videoHTML);
-            
-            // Handle close button
-            exerciseCard.querySelector('.close-video').addEventListener('click', (e) => {
-                e.stopPropagation();
-                const videoContainer = e.target.closest('.exercise-video');
-                videoContainer.querySelector('video').pause();
-                videoContainer.remove();
-            });
-        });
+// Keep your existing dropdown and checkbox functionality
+document.querySelectorAll('.exercise-header').forEach(header => {
+    header.addEventListener('click', function() {
+        const exerciseCard = this.closest('.exercise-card');
+        const dropdown = exerciseCard.querySelector('.sets-dropdown');
+        const icon = this.querySelector('.dropdown-icon');
+        
+        exerciseCard.classList.toggle('active');
+        
+        if (dropdown.style.display === 'block') {
+            dropdown.style.display = 'none';
+        } else {
+            dropdown.style.display = 'block';
+            dropdown.classList.add('show');
+        }
     });
 });
 
+// Rest of your existing code...
+
+});
+
+// Helper to extract YouTube ID from full URL
+function extractYouTubeID(url) {
+    const regex = /(?:youtube\.com.*(?:\?|&)v=|youtu\.be\/)([^&\n?#]+)/;
+    const match = url.match(regex);
+    return match ? match[1] : url;
+}
+document.querySelectorAll('.completion-toggle').forEach(checkbox => {
+  // Load saved state if available
+  const setCard = checkbox.closest('.set-card');
+  const setId = setCard.dataset.set;
+  const savedState = localStorage.getItem(`set-${setId}-completed`);
+  
+  if (savedState === 'true') {
+    checkbox.checked = true;
+    setCard.classList.add('completed');
+  }
+
+  // Toggle functionality
+  checkbox.addEventListener('click', function(e) {
+    // Allow normal checkbox behavior (toggle)
+    e.stopPropagation();
+    
+    setTimeout(() => {
+      setCard.classList.toggle('completed', this.checked);
+      localStorage.setItem(`set-${setId}-completed`, this.checked);
+    }, 10);
+  });
+
+  // Card click also toggles (optional)
+  setCard.addEventListener('click', function(e) {
+    if (!e.target.closest('.set-checkbox')) {
+      checkbox.checked = !checkbox.checked;
+      checkbox.dispatchEvent(new Event('change'));
+    }
+  });
+});
+
+// Add this to your app.js
+document.querySelectorAll('.exercise-header').forEach(header => {
+  header.addEventListener('click', function() {
+    const exerciseCard = this.closest('.exercise-card');
+    const dropdown = exerciseCard.querySelector('.sets-dropdown');
+    const icon = this.querySelector('.dropdown-icon');
+    
+    // Toggle active class on parent card
+    exerciseCard.classList.toggle('active');
+    
+    // Toggle dropdown visibility
+    if (dropdown.style.display === 'block') {
+      dropdown.style.display = 'none';
+    } else {
+      dropdown.style.display = 'block';
+      dropdown.classList.add('show');
+    }
+  });
+  
+  // Keep the existing checkbox functionality
+  const checkboxes = header.closest('.exercise-card').querySelectorAll('.completion-toggle');
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+      const setCard = this.closest('.set-card');
+      setCard.classList.toggle('completed', this.checked);
+      localStorage.setItem(`set-${setCard.dataset.set}-completed`, this.checked);
+    });
+  });
+});
+
+// Load saved states when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.set-card').forEach(card => {
+    const setId = card.dataset.set;
+    const savedState = localStorage.getItem(`set-${setId}-completed`);
+    if (savedState === 'true') {
+      card.querySelector('.completion-toggle').checked = true;
+      card.classList.add('completed');
+    }
+  });
+});
