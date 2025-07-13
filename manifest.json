@@ -12,7 +12,7 @@
   "categories": ["fitness", "health", "sports"],
   "icons": [
     {
-      "src": "https://yashk45929.github.io/workout/icon-192x192.png"
+      "src": "https://yashk45929.github.io/workout/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
