@@ -2,7 +2,7 @@
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('/workout/service-worker.js');
+      const registration = await navigator.serviceWorker.register('https://yashk45929.github.io/workout/service-worker.js');
       console.log('ServiceWorker registration successful');
       
       // Check for updates

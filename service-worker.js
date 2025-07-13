@@ -7,7 +7,7 @@ const urlsToCache = [
   'https://yashk45929.github.io/workout/',
   '/icons/icon-192x192.png',
   '/icons/icon-512x512.png'
-  // Add additional HTML files like /monday.html, /tuesday.html, etc. if needed
+  '/monday.html'
 ];
 
 self.addEventListener('install', event => {
