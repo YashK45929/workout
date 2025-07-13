@@ -8,6 +8,14 @@
     <meta name="description" content="Evidence-Based Exercise Programming with Comprehensive Tracking">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <!-- PWA Meta Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Gym Workout">
+    <meta name="description" content="Your personal gym training program with exercise tracking">
+    <link rel="manifest" href="/manifest.json">
 </head>
 <body>
     <div class="container">
@@ -60,6 +68,20 @@
         </div>
 
     <script src="app.js"></script>
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => {
+                console.log('ServiceWorker registered');
+                })
+                .catch(err => {
+                console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>       
 
 </body>
 </html>
